@@ -1,0 +1,2 @@
+class LotteriesController < ApplicationController
+end
