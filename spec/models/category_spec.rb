@@ -32,6 +32,35 @@ RSpec.describe Category, type: :model do
     end
   end
 
+  describe 'slug' do
+    context 'when blank' do
+      let(:category) do
+        build(:category, slug: "")
+      end
+      it 'to invalid' do
+        expect(category).not_to be_valid
+      end
+    end
+    context 'maxlength' do
+      context 'length 15' do
+        let(:category) do
+          build(:category, slug: "a" * 15)
+        end
+        it 'to valid' do
+          expect(category).to be_valid
+        end
+      end
+      context 'length 16' do
+        let(:category) do
+          build(:category, slug: "a" * 16)
+        end
+        it 'to invalid' do
+          expect(category).not_to be_valid
+        end
+      end
+    end
+  end
+
   # こういう書き方もできる
   # it "invalidになる" do
   #   category = Category.new(name: "", slug: "fuga")
