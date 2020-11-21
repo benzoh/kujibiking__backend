@@ -1,2 +1,0 @@
-class LotteriesController < ApplicationController
-end

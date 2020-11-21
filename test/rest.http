@@ -1,0 +1,14 @@
+GET http://localhost:3000/hoge.html HTTP/1.1
+###
+GET http://localhost:3000/api/v1/test
+###
+POST http://localhost:3000/api/v1/auth HTTP/1.1
+content-type: application/json
+
+{
+  "email":"example@example.com",
+  "password":"password",
+  "password_confirmation": "password"
+}'
+###
+GET http://localhost:3000/api/v1/lotteries
