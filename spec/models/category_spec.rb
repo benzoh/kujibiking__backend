@@ -5,24 +5,27 @@ require "rails_helper"
 RSpec.describe Category, type: :model do
   describe "name" do
     context "blankの時に" do
+      let(:category) do
+        build(:category, name: "")
+      end
       it "invalidになる" do
-        category = build(:category, name: "")
-        # category = Category.new(name: "", slug: "fuga")
         expect(category).not_to be_valid
       end
     end
     context 'maxlength' do
       context '30文字' do
+        let(:category) do
+          build(:category, name: "あ" * 30)
+        end
         it 'to valid' do
-          category = build(:category, name: "あ" * 30)
-          # category = Category.new(name: "あ" * 30, slug: "fuga")
           expect(category).to be_valid
         end
       end
       context '31文字' do
+        let(:category) do
+          build(:category, name: "あ" * 31)
+        end
         it 'to invalid' do
-          category = build(:category, name: "あ" * 31)
-          # category = Category.new(name: "あ" * 31, slug: "fuga")
           expect(category).not_to be_valid
         end
       end
