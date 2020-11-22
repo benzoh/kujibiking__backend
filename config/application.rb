@@ -44,7 +44,9 @@ module Kujibiking
     #   end
     # end
 
+    ## add hosts
     # config.hosts << '.amazonaws.com'
+    config.hosts << "www.example.com"
 
     # RSpecの制御
     config.generators do |g|
