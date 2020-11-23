@@ -23,7 +23,11 @@ module Api
       end
 
       def update
-        # TODO
+        if @category.update(category_params)
+          render json: {category: @category}
+        else
+          render json: {errors: @category.errors}
+        end
       end
 
       def destroy

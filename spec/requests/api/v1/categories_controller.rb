@@ -72,4 +72,32 @@ RSpec.describe "Api::V1::Categories", type: :request do
       expect(json.key?('errors')).to be true
     end
   end
+
+  describe 'PUT /api/v1/categories#update' do
+    let(:update_param) do
+      category = create(:category)
+      update_param = attributes_for(:category, name: 'update test', slug: 'update_test')
+      update_param[:id] = category.id
+      update_param
+    end
+    it "正常レスポンスコードが返ってくる" do
+      put api_v1_category_url({id: update_param[:id]}), params: update_param
+      expect(response.status).to eq 200
+    end
+    it 'return correct data' do
+      put api_v1_category_url({id: update_param[:id]}), params: update_param
+      json = JSON.parse(response.body)
+      expect(json['category']['name']).to eq('update test')
+      expect(json['category']['slug']).to eq('update_test')
+    end
+    it 'return errors with bad params' do
+      put api_v1_category_url({id: update_param[:id]}), params: {name: ''}
+      json = JSON.parse(response.body)
+      expect(json.key?('errors')).to be true
+    end
+    it 'return 404 when a not exist id' do
+      put api_v1_category_url({id: update_param[:id] + 1}), params: update_param
+      expect(response.status).to eq 404
+    end
+  end
 end
