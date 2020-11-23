@@ -31,7 +31,8 @@ module Api
       end
 
       def destroy
-        # TODO
+        @category.destroy
+        render json: {category: @category}
       end
 
       private

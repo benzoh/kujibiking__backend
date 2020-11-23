@@ -100,4 +100,24 @@ RSpec.describe "Api::V1::Categories", type: :request do
       expect(response.status).to eq 404
     end
   end
+
+  describe 'DELETE /api/v1/categories#delete' do
+    let(:delete_post) do
+      create(:category)
+    end
+    it "正常レスポンスコードが返ってくる" do
+      delete api_v1_category_url({id: delete_post.id})
+      expect(response.status).to eq 200
+    end
+    it 'return one less' do
+      delete_post
+      expect do
+        delete api_v1_category_url({id: delete_post.id})
+      end.to change {Category.count}.by(-1)
+    end
+    it 'return 404 when a not exist id' do
+      delete api_v1_category_url({id: delete_post.id + 1})
+      expect(response.status).to eq 404
+    end
+  end
 end
