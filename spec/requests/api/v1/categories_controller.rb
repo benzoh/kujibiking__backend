@@ -44,4 +44,32 @@ RSpec.describe "Api::V1::Categories", type: :request do
       expect(response.status).to eq 404
     end
   end
+
+  describe "POST /api/v1/categories#create" do
+    let(:new_category) do
+      attributes_for(:category, name: 'create test', slug: 'create_test')
+    end
+    it "正常レスポンスコードが返ってくる" do
+      post api_v1_categories_url, params: new_category
+      expect(response.status).to eq 200
+    end
+    it 'increment count' do
+      Rails.logger.debug Category.count
+      expect do
+        post api_v1_categories_url, params: new_category
+        Rails.logger.debug Category.count
+      end.to change {Category.count}.by(1)
+    end
+    it 'return name, slug' do
+      post api_v1_categories_url, params: new_category
+      json = JSON.parse response.body
+      expect(json['category']['name']).to eq('create test')
+      expect(json['category']['slug']).to eq('create_test')
+    end
+    it 'return errors' do
+      post api_v1_categories_url, params: {}
+      json = JSON.parse response.body
+      expect(json.key?('errors')).to be true
+    end
+  end
 end

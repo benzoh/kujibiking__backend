@@ -13,7 +13,13 @@ module Api
       end
 
       def create
-        # TODO
+        category = Category.new(category_params)
+
+        if category.save
+          render json: { category: category }
+        else
+          render json: { errors: category.errors }
+        end
       end
 
       def update
