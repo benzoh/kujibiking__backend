@@ -24,4 +24,24 @@ RSpec.describe "Api::V1::Categories", type: :request do
       expect(json["categories"][2]["id"]).to eq(first_id - 2)
     end
   end
+
+  describe "GET /api/v1/categories#show" do
+    let(:category) do
+      create(:category, name: 'show test', slug: 'show_test')   
+    end
+    it "正常レスポンスコードが返ってくる" do
+      get api_v1_category_url({id: category.id})
+      expect(response.status).to eq 200
+    end
+    it "nameが正しく返ってくる" do
+      get api_v1_category_url({id: category.id})
+      json = JSON.parse(response.body)
+      # Rails.logger.debug json
+      expect(json["category"]["name"]).to eq("show test")
+    end
+    it '404' do
+      get api_v1_category_url({id: category.id + 1})
+      expect(response.status).to eq 404
+    end
+  end
 end

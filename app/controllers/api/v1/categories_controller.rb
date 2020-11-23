@@ -4,13 +4,12 @@ module Api
       before_action :set_category, only: %i[show update destroy]
 
       def index
-        # TODO
         categories = Category.order(created_at: :desc).limit(20)
         render json: { categories: categories }
       end
 
       def show
-        # TODO
+        render json: { category: @category }
       end
 
       def create
