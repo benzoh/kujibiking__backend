@@ -47,6 +47,7 @@ module Kujibiking
     ## add hosts
     # config.hosts << '.amazonaws.com'
     config.hosts << "www.example.com"
+    config.hosts << "junk-server.test"
 
     # RSpecの制御
     config.generators do |g|
