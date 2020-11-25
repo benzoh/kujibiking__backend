@@ -60,4 +60,7 @@ Rails.application.configure do
   # config.debug_exception_response_format = :api
 
   config.reload_classes_only_on_change = false
+
+  # fakerの日本語化：効いてる？
+  # Faker::Config.locale = "ja"
 end
