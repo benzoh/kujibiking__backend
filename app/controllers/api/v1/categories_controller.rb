@@ -5,18 +5,18 @@ module Api
 
       def index
         categories = Category.order(created_at: :desc).limit(20)
-        render json: { categories: categories }
+        render json: categories
       end
 
       def show
-        render json: { category: @category }
+        render json: @category
       end
 
       def create
         category = Category.new(category_params)
 
         if category.save
-          render json: { category: category }
+          render json: category
         else
           render json: { errors: category.errors }
         end
@@ -24,7 +24,7 @@ module Api
 
       def update
         if @category.update(category_params)
-          render json: {category: @category}
+          render json: @category
         else
           render json: {errors: @category.errors}
         end
@@ -32,7 +32,7 @@ module Api
 
       def destroy
         @category.destroy
-        render json: {category: @category}
+        render json: @category
       end
 
       private
