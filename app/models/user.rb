@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable, :trackable, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
+  has_many :lotteries, dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 100 }
 end

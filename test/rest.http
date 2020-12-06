@@ -32,6 +32,8 @@ content-type: application/json
 ###
 GET http://localhost:3000/api/v1/lotteries
 ###
+GET http://localhost:3000/api/v1/lotteries/1
+###
 GET http://localhost:3000/api/v1/categories
 ###
 GET http://localhost:3000/api/v1/categories/1
