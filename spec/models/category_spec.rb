@@ -42,17 +42,17 @@ RSpec.describe Category, type: :model do
       end
     end
     context 'maxlength' do
-      context 'length 15' do
+      context 'length 30' do
         let(:category) do
-          build(:category, slug: "a" * 15)
+          build(:category, slug: "a" * 30)
         end
         it 'to valid' do
           expect(category).to be_valid
         end
       end
-      context 'length 16' do
+      context 'length 31' do
         let(:category) do
-          build(:category, slug: "a" * 16)
+          build(:category, slug: "a" * 31)
         end
         it 'to invalid' do
           expect(category).not_to be_valid

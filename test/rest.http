@@ -1,7 +1,11 @@
 GET http://localhost:3000/hoge.html HTTP/1.1
+
 ###
+
 GET http://localhost:3000/api/v1/test
+
 ###
+
 # sign up
 POST http://localhost:3000/api/v1/auth HTTP/1.1
 content-type: application/json
@@ -11,7 +15,21 @@ content-type: application/json
   "email":"example@example.com",
   "password":"password"
 }
+
 ###
+
+# sign up 2
+POST http://localhost:3000/api/v1/auth HTTP/1.1
+content-type: application/json
+
+{
+  "name": "benzoh",
+  "email":"benzoh@example.com",
+  "password":"password"
+}
+
+###
+
 # sign in / correct
 POST http://localhost:3000/api/v1/auth/sign_in
 content-type: application/json
@@ -20,7 +38,9 @@ content-type: application/json
   "email":"example@example.com",
   "password":"password"
 }
+
 ###
+
 # sign in / mistaken
 POST http://localhost:3000/api/v1/auth/sign_in
 content-type: application/json
@@ -29,11 +49,29 @@ content-type: application/json
   "email":"example@example.com",
   "password":"hoge"
 }
+
 ###
+
 GET http://localhost:3000/api/v1/lotteries
+
 ###
+
 GET http://localhost:3000/api/v1/lotteries/2
+
 ###
+
+POST http://localhost:3000/api/v1/categories
+content-type: application/json
+
+{
+  "name":"category name",
+  "slug":"category_name"
+}
+
+###
+
 GET http://localhost:3000/api/v1/categories
+
 ###
+
 GET http://localhost:3000/api/v1/categories/1

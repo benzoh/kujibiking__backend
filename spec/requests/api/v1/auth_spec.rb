@@ -38,7 +38,8 @@ RSpec.describe "Api::V1::Auth", type: :request do
     it "nameが正しく返ってくる" do
       post api_v1_user_session_url, params: user
       json = JSON.parse(response.body)
-      expect(json["data"]["name"]).to eq("signinテスト")
+      expect(json["data"]["user"]["name"]).to eq("signinテスト")
+      # expect(json["data"]["name"]).to eq("signinテスト")
     end
     it "不正パラメータの時にerrorsが返ってくる" do
       post api_v1_user_session_url, params: {}

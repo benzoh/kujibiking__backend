@@ -4,7 +4,7 @@ module Api
       before_action :set_lottery, only: %i[show update destroy]
       
       def index
-        lotteries = Lottery.order(created_at: :desc)
+        lotteries = Lottery.includes(:user).order(created_at: :desc)
         # raise
         render json: { status: 'SUCCESS', message: 'Loaded lotteries', data: lotteries }
       end
