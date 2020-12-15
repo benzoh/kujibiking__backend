@@ -60,8 +60,22 @@ GET http://localhost:3000/api/v1/lotteries/2
 
 ###
 
+# トークンをくっつけるのは可能？？
+POST http://localhost:3000/api/v1/lotteries
+content-type: application/json
+
+{
+  "result": "はずれ",
+  "memo": "この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。アカウント"
+}
+
+###
+
 POST http://localhost:3000/api/v1/categories
 content-type: application/json
+access-token: 
+client: 
+uid: 
 
 {
   "name":"category name",

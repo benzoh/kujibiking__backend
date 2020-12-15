@@ -13,10 +13,25 @@ module Api
         render json: @lottery
       end
 
+      def create
+        lottery = current_api_v1_user.lotteries.new(lottery_params)
+        # lottery = Lottery.new(lottery_params)
+
+        if lottery.save
+          render json: lottery
+        else
+          render json: { errors: lottery.errors }
+        end
+      end
+
       private
 
       def set_lottery
         @lottery = Lottery.find(params[:id])
+      end
+
+      def lottery_params
+        params.permit(:result, :memo)
       end
     end
   end
