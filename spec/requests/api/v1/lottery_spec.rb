@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require 'byebug'
 
 RSpec.describe "Api::V1::Lotteries", type: :request do
   describe "POST /api/v1/lotteries#create" do
@@ -34,6 +35,7 @@ RSpec.describe "Api::V1::Lotteries", type: :request do
     end
     it "不正パラメータの時にerrorsが返ってくる" do
       post api_v1_lotteries_url, params: {}, headers: authorized_headers
+      # byebug
       json = JSON.parse(response.body)
       expect(json.key?("errors")).to be true
     end
