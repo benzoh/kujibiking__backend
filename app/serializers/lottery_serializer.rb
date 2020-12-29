@@ -1,5 +1,5 @@
 class LotterySerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :result, :memo
 
   belongs_to :user
 end
