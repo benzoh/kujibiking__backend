@@ -50,7 +50,9 @@ group :development do
 
   gem "rspec-rails"
   gem "factory_bot_rails"
-  gem 'rubocop-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'solargraph'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
