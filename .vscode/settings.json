@@ -7,6 +7,6 @@
   "rufo.exe": "/usr/local/bundle/bin/rufo",
   "rufo.useBundler": false,
   "[ruby]": {
-    "editor.defaultFormatter": "misogi.ruby-rubocop"
+    "editor.defaultFormatter": "misogi.ruby-rubocop",
   }
 }

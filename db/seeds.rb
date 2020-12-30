@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # seeds/以下呼ぶ
-seed_models = %i[category]
+seed_models = %i[category user lottery]
 
 seed_models.each do |model|
   require "./db/seeds/#{model}_seeds"
