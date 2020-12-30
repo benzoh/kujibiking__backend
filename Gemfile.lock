@@ -220,6 +220,7 @@ GEM
       rack (>= 1.1)
       rubocop (>= 0.87.0)
     ruby-progressbar (1.10.1)
+    rufo (0.12.0)
     solargraph (0.40.0)
       backport (~> 1.1)
       benchmark
@@ -280,7 +281,9 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.4)
   rspec-rails
+  rubocop
   rubocop-rails
+  rufo
   solargraph
   spring
   spring-watcher-listen (~> 2.0.0)
