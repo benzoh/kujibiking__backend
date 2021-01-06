@@ -8,5 +8,6 @@
   "rufo.useBundler": false,
   "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop",
-  }
+  },
+  // "http.proxy": "http://127.0.0.1:3000"
 }
