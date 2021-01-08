@@ -34,6 +34,12 @@ class ApplicationPolicy
     false
   end
 
+  private
+
+  def mine?
+    @record.user == @user
+  end
+
   class Scope
     attr_reader :user, :scope
 

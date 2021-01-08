@@ -14,11 +14,11 @@ class LotteryPolicy < ApplicationPolicy
   end
 
   def update?
-    @record.user == @user
+    mine?
   end
 
   def destroy?
-    @record.user == @user
+    mine?
   end
 
   class Scope < Scope
