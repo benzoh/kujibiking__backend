@@ -40,6 +40,10 @@ class ApplicationPolicy
     @record.user == @user
   end
 
+  def admin?
+    @user.present? && @user.admin?
+  end
+
   class Scope
     attr_reader :user, :scope
 

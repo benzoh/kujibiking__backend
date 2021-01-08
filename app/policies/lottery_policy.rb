@@ -14,11 +14,11 @@ class LotteryPolicy < ApplicationPolicy
   end
 
   def update?
-    mine?
+    mine? || admin?
   end
 
   def destroy?
-    mine?
+    mine? || admin?
   end
 
   class Scope < Scope
