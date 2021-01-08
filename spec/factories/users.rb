@@ -7,5 +7,6 @@ FactoryBot.define do
     remember_created_at { nil }
     sequence(:name) { |n| "user#{n}" }
     tokens { nil }
+    admin { false }
   end
 end
