@@ -8,5 +8,9 @@ FactoryBot.define do
     sequence(:name) { |n| "user#{n}" }
     tokens { nil }
     admin { false }
+
+    trait :admin do
+      admin { true }
+    end
   end
 end

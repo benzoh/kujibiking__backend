@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe LotteryPolicy, type: :policy do
   let(:user) { User.new }
-  let(:admin_user) { User.new(admin: true) }
+  let(:admin_user) { create(:user, :admin) }
   let(:lottery) { create(:lottery) }
 
   subject { described_class }
