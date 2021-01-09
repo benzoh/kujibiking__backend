@@ -9,10 +9,6 @@ RSpec.describe LotteryPolicy, type: :policy do
 
   subject { described_class }
 
-  permissions '.scope' do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
   permissions :index?, :show? do
     it '未ログインの時に許可' do
       expect(subject).to permit(nil, lottery)

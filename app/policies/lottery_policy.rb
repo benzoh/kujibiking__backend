@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# lottery policy class
 class LotteryPolicy < ApplicationPolicy
   def index?
     true
@@ -21,6 +22,7 @@ class LotteryPolicy < ApplicationPolicy
     mine? || admin?
   end
 
+  # scope
   class Scope < Scope
     def resolve
       scope.all
