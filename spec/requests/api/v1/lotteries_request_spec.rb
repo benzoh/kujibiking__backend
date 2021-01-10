@@ -7,6 +7,7 @@ RSpec.describe 'Api::V1::Lotteries', type: :request do
   let(:authorized_headers) do
     authorized_user_headers
   end
+
   describe 'POST /api/v1/lotteries#create' do
     let(:new_lottery) do
       attributes_for(:lottery, result: 'テスト', memo: 'memoテスト')
@@ -35,4 +36,6 @@ RSpec.describe 'Api::V1::Lotteries', type: :request do
       expect(json.key?('errors')).to be true
     end
   end
+
+  # TODO: post以外書いてないやないか
 end
