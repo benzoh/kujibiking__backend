@@ -3,6 +3,9 @@
 require 'rails_helper'
 require 'byebug'
 
+#
+# users controller test
+#
 RSpec.describe 'Api::V1::Users', type: :request do
   before do
     @user = create(:user, name: 'test user')
@@ -25,7 +28,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
       get api_v1_users_url, headers: @authorized_admin_headers
       json = JSON.parse(response.body)
       # byebug
-      expect(json['users'].length).to eq 3
+      expect(json['users'].length).to eq(3 + 2) # headers用2件含む
     end
 
     it 'id降順にレスポンスが返る' do
@@ -35,17 +38,18 @@ RSpec.describe 'Api::V1::Users', type: :request do
       expect(json['users'][1]['id']).to eq(first_id - 1)
       expect(json['users'][2]['id']).to eq(first_id - 2)
       expect(json['users'][3]['id']).to eq(first_id - 3)
+      expect(json['users'][4]['id']).to eq(first_id - 4)
     end
   end
 
   describe 'GET /api/v1/users#show' do
     it '200が返る' do
-      get api_v1_user_url({ id: user.id }), headers: @authorized_headers
-      expect(res.status).to eq 200
+      get api_v1_user_url({ id: @user.id }), headers: @authorized_headers
+      expect(response.status).to eq 200
     end
 
     it 'nameが正しく返る' do
-      get api_v1_user_url({ id: user.id }), headers: @authorized_headers
+      get api_v1_user_url({ id: @user.id }), headers: @authorized_headers
       json = JSON.parse(response.body)
       expect(json['user']['name']).to eq 'test user'
     end
@@ -53,6 +57,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
     it '404が返る' do
       last_user = User.last
       get api_v1_user_url({ id: last_user.id + 1 }), headers: @authorized_headers
+      # byebug
       expect(response.status).to eq 404
     end
   end
@@ -115,6 +120,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
       expect(json.key?('errors')).to be true
     end
 
+    # TODO: 404返ってこない
     it '存在しないIDのとき404返す' do
       patch api_v1_user_url({ id: update_param[:id] + 1 }), params: update_param, headers: @authorized_headers
       expect(response.status).to eq 404

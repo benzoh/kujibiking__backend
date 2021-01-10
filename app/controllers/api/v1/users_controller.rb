@@ -2,12 +2,17 @@
 
 module Api
   module V1
+    #
+    # users controller
+    #
     class UsersController < ApplicationController
+      before_action :set_user, only: %i[show update destroy]
+
       def index
-        users = User.all
+        users = User.order(created_at: :desc).limit(20)
         authorize users
 
-        render json: { status: 'SUCCESS', message: 'Lodaded users', data: users }
+        render json: users
       end
 
       def show
@@ -22,16 +27,16 @@ module Api
         if user.save
           render json: user
         else
-          render json: { errors: lottery.errors }
+          render json: { errors: user.errors }
         end
       end
 
       def update
         authorize @user
-        if @lottery.save
+        if @user.save
           render json: @user
         else
-          render json: { errors: lottery.errors }
+          render json: { errors: user.errors }
         end
       end
 
@@ -43,7 +48,10 @@ module Api
       private
 
       def set_user
+        # byebug
         @user = User.find(params[:id])
+
+        render nothing: true, status: :not_found if @user.nil?
       end
 
       def user_params
