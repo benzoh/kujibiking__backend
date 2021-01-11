@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def render_404
-    render dtatus: :not_found, json: { message: 'record not found.' }
+    render status: :not_found, json: { status: 404, message: 'record not found.' }
   end
 
   def configure_permitted_parameters
@@ -18,6 +18,6 @@ class ApplicationController < ActionController::API
   end
 
   def render_403
-    render status: :forbidden, json: { message: "You don't have permission." }
+    render status: :forbidden, json: { status: 403, message: "You don't have permission." }
   end
 end
