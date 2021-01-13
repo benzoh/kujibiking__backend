@@ -22,7 +22,7 @@ module Api
 
       def create
         authorize User
-        user = User.new(user_params)
+        user = User.new(user_create_params)
 
         if user.save
           render json: user
@@ -54,8 +54,13 @@ module Api
         render nothing: true, status: :not_found if @user.nil?
       end
 
+      # createの時のみadmin権限を設定できるようにする
+      def user_create_params
+        params.permit(:name, :email, :admin, :password)
+      end
+
       def user_params
-        params.permit(:name, :email)
+        params.permit(:name, :email, :password)
       end
     end
   end

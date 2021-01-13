@@ -75,7 +75,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
     it 'ユーザ数が増える' do
       expect do
         post api_v1_users_url, params: new_user, headers: @authorized_admin_headers
-      end.to change { users.count }.by(1)
+      end.to change { User.count }.by(1)
     end
 
     it 'name, emailが返る' do
@@ -120,7 +120,6 @@ RSpec.describe 'Api::V1::Users', type: :request do
       expect(json.key?('errors')).to be true
     end
 
-    # TODO: 404返ってこない
     it '存在しないIDのとき404返す' do
       patch api_v1_user_url({ id: update_param[:id] + 1 }), params: update_param, headers: @authorized_headers
       expect(response.status).to eq 404
