@@ -33,7 +33,7 @@ module Api
 
       def update
         authorize @user
-        if @user.save
+        if @user.update(user_params)
           render json: @user
         else
           render json: { errors: user.errors }
@@ -48,8 +48,8 @@ module Api
       private
 
       def set_user
-        # byebug
         @user = User.find(params[:id])
+        # byebug
 
         render nothing: true, status: :not_found if @user.nil?
       end

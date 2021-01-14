@@ -81,7 +81,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
     it 'name, emailが返る' do
       post api_v1_users_url, params: new_user, headers: @authorized_admin_headers
       json = JSON.parse response.body
-      expect(json['user']['name']).to eq 'test_user'
+      expect(json['user']['name']).to eq 'test user'
       expect(json['user']['email']).to eq 'test_user@example.com'
       expect(json['user']['admin']).to be true
     end
@@ -95,14 +95,13 @@ RSpec.describe 'Api::V1::Users', type: :request do
 
   describe 'PATCH /api/v1/users#update' do
     let(:update_param) do
-      user = create(:user)
       update_param = attributes_for(:user, name: 'update test', email: 'update_test@example.com', admin: true)
-      update_param[:id] = user.id
+      update_param[:id] = @user.id
       update_param
     end
 
     it '200返す' do
-      patch api_v1_user_url({ id: update_param[:id] }), params: update_param
+      patch api_v1_user_url({ id: update_param[:id] }), params: update_param, headers: @authorized_headers
       expect(response.status).to eq 200
     end
 
