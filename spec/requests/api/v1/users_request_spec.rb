@@ -109,7 +109,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
       patch api_v1_user_url({ id: update_param[:id] }), params: update_param, headers: @authorized_headers
       json = JSON.parse(response.body)
       expect(json['user']['name']).to eq 'update test'
-      expect(json['user']['emain']).to eq 'update_test@example.com'
+      expect(json['user']['email']).to eq 'update_test@example.com'
       expect(json['user']['admin']).to be false # admin権限は書き換えできると困るのでfalseのまま
     end
 
@@ -120,7 +120,8 @@ RSpec.describe 'Api::V1::Users', type: :request do
     end
 
     it '存在しないIDのとき404返す' do
-      patch api_v1_user_url({ id: update_param[:id] + 1 }), params: update_param, headers: @authorized_headers
+      last_user = User.last
+      patch api_v1_user_url({ id: last_user.id + 1 }), params: update_param, headers: @authorized_admin_headers
       expect(response.status).to eq 404
     end
   end

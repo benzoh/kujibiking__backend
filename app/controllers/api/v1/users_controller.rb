@@ -36,13 +36,15 @@ module Api
         if @user.update(user_params)
           render json: @user
         else
-          render json: { errors: user.errors }
+          render json: { errors: @user.errors }
         end
       end
 
       def destroy
         authorize @user
         @user.destroy
+
+        render json: @user
       end
 
       private
