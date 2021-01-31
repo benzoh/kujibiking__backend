@@ -9,6 +9,10 @@ module Api
       def index
         render 'no data'
       end
+
+      def create
+        render 'no data'
+      end
     end
   end
 end
