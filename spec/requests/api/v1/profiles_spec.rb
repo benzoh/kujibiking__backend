@@ -4,8 +4,9 @@ require 'rails_helper'
 require 'byebug'
 
 RSpec.describe 'Api::V1::Profiles', type: :request do
-  let(:authorized_headers) do
-    authorized_user_headers
+  before do
+    @user = create(:user, name: 'test user')
+    @authorized_headers = authorized_user_headers(@user)
   end
 
   describe 'GET /api/v1/profiles' do
@@ -16,27 +17,25 @@ RSpec.describe 'Api::V1::Profiles', type: :request do
   end
 
   describe 'POST /api/v1/profiles#create' do
-    let(:user) { create(:user, name: 'test name') }
-    # let(:user) { attributes_for(:user, name: 'test name') }
     let(:new_profile) do
-      attributes_for(:profile, { name: 'test name', user_id: user.id })
+      attributes_for(:profile, { name: 'test name', user_id: @user.id })
     end
 
     it 'return response code 200' do
+      post api_v1_profiles_path, params: new_profile, headers: @authorized_headers
       # byebug
-      post api_v1_profiles_path, params: new_profile
       expect(response.status).to eq 200
     end
 
     it 'return collect data' do
-      post api_v1_lotteries_url, params: new_profile
+      post api_v1_profiles_path, params: new_profile, headers: @authorized_headers
       json = JSON.parse(response.body)
       # byebug
       expect(json['profile']['name']).to eq 'test name'
     end
 
     it 'Errors are returned when the parameter is invalid' do
-      post api_v1_lotteries_url, params: new_profile
+      post api_v1_profiles_path, params: {}, headers: @authorized_headers
       json = JSON.parse(response.body)
       expect(json.key?('errors')).to be true
     end
@@ -50,13 +49,14 @@ RSpec.describe 'Api::V1::Profiles', type: :request do
 
     it 'return response code 200' do
       # byebug
-      get api_v1_profile_path({ id: new_profile.id })
+      get api_v1_profile_path({ id: user.id })
       expect(response.status).to eq 200
     end
 
     it 'name is returned correctly' do
-      get api_v1_profile_path({ id: new_profile.id })
+      get api_v1_profile_path({ id: user.id })
       json = JSON.parse(response.body)
+      byebug
       expect(json['profile']['name']).to eq('test name')
     end
 
