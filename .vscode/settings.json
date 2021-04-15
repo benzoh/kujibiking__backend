@@ -1,9 +1,11 @@
 {
   "editor.formatOnSave": true,
   "ruby.format": "rubocop",
+  "ruby.useLanguageServer": true,
   "ruby.lint": {
     "rubocop": true
   },
+  "ruby.rubocop.onSave": true,
   "rufo.exe": "/usr/local/bundle/bin/rufo",
   "rufo.useBundler": false,
   "[ruby]": {

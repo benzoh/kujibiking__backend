@@ -27,6 +27,7 @@ module Api
       end
 
       def show
+        byebug
         render json: @profile
       end
 
@@ -46,7 +47,7 @@ module Api
 
       def set_profile
         user = User.find(params[:id])
-        byebug
+        # byebug
         @profile = user.profile
       end
 
